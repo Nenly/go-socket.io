@@ -53,9 +53,9 @@ func newConn(engineConn engineio.Conn, handlers *namespaceHandlers) error {
 		handlers:   handlers,
 		namespaces: newNamespaces(),
 	}
+	defer ret.Close()
 
 	if err := ret.connect(); err != nil {
-		_ = ret.Close()
 		return err
 	}
 
